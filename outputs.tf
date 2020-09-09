@@ -1,5 +1,5 @@
 output "db_instance_arn" {
-  value = aws_db_instance.instance.arn
+  value = aws_db_instance.this.arn
 }
 
 output "db_master_secret_name" {
@@ -7,7 +7,7 @@ output "db_master_secret_name" {
 }
 
 output "db_endpoint" {
-  value = aws_db_instance.instance.endpoint
+  value = aws_db_instance.this.endpoint
 }
 
 output "db_security_group_id" {

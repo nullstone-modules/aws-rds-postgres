@@ -1,4 +1,4 @@
-resource "aws_db_instance" "instance" {
+resource "aws_db_instance" "this" {
   identifier = "${var.stack_name}-${var.env}-${var.block_name}"
 
   db_subnet_group_name = aws_db_subnet_group.this.name
