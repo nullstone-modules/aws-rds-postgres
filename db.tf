@@ -14,6 +14,8 @@ resource "aws_db_instance" "this" {
   username = var.block_name
   password = random_password.this.result
 
+  final_snapshot_identifier = "${var.stack_name}-${var.env}-${var.block_name}"
+
   tags = {
     Stack       = var.stack_name
     Environment = var.env
