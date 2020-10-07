@@ -1,15 +1,16 @@
 resource "aws_db_instance" "this" {
   identifier = "${var.stack_name}-${var.env}-${var.block_name}"
 
-  db_subnet_group_name = aws_db_subnet_group.this.name
-  engine               = "postgres"
-  engine_version       = var.postgres_version
-  instance_class       = var.instance_class
-  multi_az             = true
-  allocated_storage    = var.allocated_storage
-  storage_encrypted    = true
-  storage_type         = "standard"
-  port                 = 5432
+  db_subnet_group_name   = aws_db_subnet_group.this.name
+  engine                 = "postgres"
+  engine_version         = var.postgres_version
+  instance_class         = var.instance_class
+  multi_az               = true
+  allocated_storage      = var.allocated_storage
+  storage_encrypted      = true
+  storage_type           = "standard"
+  port                   = 5432
+  vpc_security_group_ids = [aws_security_group.this.id]
 
   username = var.block_name
   password = random_password.this.result
