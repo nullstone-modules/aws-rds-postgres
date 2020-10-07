@@ -17,3 +17,7 @@ output "db_security_group_id" {
 output "db_user_security_group_id" {
   value = aws_security_group.user.id
 }
+
+output "internal_db_fqdn" {
+  value = aws_route53_record.this.fqdn
+}
