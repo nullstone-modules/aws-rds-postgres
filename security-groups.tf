@@ -1,23 +1,13 @@
 resource "aws_security_group" "this" {
   vpc_id = local.vpc_id
-  name   = "${var.stack_name}/${var.env}/${var.block_name}"
-
-  tags = {
-    Stack       = var.stack_name
-    Environment = var.env
-    Block       = var.block_name
-  }
+  name   = data.ns_workspace.this.slashed_name
+  tags   = data.ns_workspace.this.tags
 }
 
 resource "aws_security_group" "user" {
   vpc_id = local.vpc_id
-  name   = "${var.stack_name}/${var.env}/${var.block_name}-user"
-
-  tags = {
-    Stack       = var.stack_name
-    Environment = var.env
-    Block       = var.block_name
-  }
+  name   = "${data.ns_workspace.this.slashed_name}-user"
+  tags   = data.ns_workspace.this.tags
 }
 
 resource "aws_security_group_rule" "this-from-user" {

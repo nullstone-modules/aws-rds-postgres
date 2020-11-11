@@ -1,5 +1,5 @@
 resource "aws_db_instance" "this" {
-  identifier = "${var.stack_name}-${var.env}-${var.block_name}"
+  identifier = data.ns_workspace.this.hyphenated_name
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
   engine                 = "postgres"
@@ -17,21 +17,12 @@ resource "aws_db_instance" "this" {
 
   final_snapshot_identifier = "${var.stack_name}-${var.env}-${var.block_name}"
 
-  tags = {
-    Stack       = var.stack_name
-    Environment = var.env
-    Block       = var.block_name
-  }
+  tags = data.ns_workspace.this.tags
 }
 
 resource "aws_db_subnet_group" "this" {
-  name        = "${var.stack_name}-${var.env}-${var.block_name}"
+  name        = data.ns_workspace.this.hyphenated_name
   description = "Postgres db subnet group for postgres cluster"
   subnet_ids  = local.private_subnet_ids
-
-  tags = {
-    Stack       = var.stack_name
-    Environment = var.env
-    Block       = var.block_name
-  }
+  tags        = data.ns_workspace.this.tags
 }

@@ -1,6 +1,6 @@
 resource "aws_route53_record" "this" {
-  name    = var.block_name
-  zone_id = data.terraform_remote_state.network.outputs.internal_zone_id
+  name    = data.ns_workspace.this.block
+  zone_id = data.ns_connection.network.outputs.internal_zone_id
   type    = "A"
 
   alias {
