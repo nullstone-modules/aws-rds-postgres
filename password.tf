@@ -10,13 +10,9 @@ resource "random_password" "this" {
 }
 
 resource "aws_secretsmanager_secret" "password" {
-  name_prefix = "${var.stack_name}/${var.env}/${var.block_name}/master"
+  name_prefix = "${data.ns_workspace.this.slashed_name}/master"
 
-  tags = {
-    Stack       = var.stack_name
-    Environment = var.env
-    Block       = var.block_name
-  }
+  tags = data.ns_workspace.this.tags
 }
 
 resource "aws_secretsmanager_secret_version" "password" {
