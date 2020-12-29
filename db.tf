@@ -12,10 +12,10 @@ resource "aws_db_instance" "this" {
   port                   = 5432
   vpc_security_group_ids = [aws_security_group.this.id]
 
-  username = var.block_name
+  username = data.ns_workspace.this.block
   password = random_password.this.result
 
-  final_snapshot_identifier = "${var.stack_name}-${var.env}-${var.block_name}"
+  final_snapshot_identifier = data.ns_workspace.this.hyphenated_name
 
   tags = data.ns_workspace.this.tags
 }
