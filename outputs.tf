@@ -22,8 +22,3 @@ output "db_user_security_group_id" {
   value       = aws_security_group.user.id
   description = "string ||| The ID of a security group that, when attached to a network device, allows access to the Postgres instance."
 }
-
-output "internal_db_fqdn" {
-  value       = aws_route53_record.this.fqdn
-  description = "string ||| The full domain for an internal, vanity subdomain for the Postgres instance."
-}

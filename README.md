@@ -16,4 +16,3 @@ Nullstone Block standing up AWS RDS Postgres
 - `db_endpoint: string` - Postgres Connection Endpoint
 - `db_security_group_id: string` - Security Group ID for RDS Cluster
 - `db_user_security_group_id: string` - Security Group ID - Attach to any instance to gain access to the postgres cluster
-- `internal_db_fqdn: string` - The full domain for an internal, vanity subdomain for the Postgres instance.
