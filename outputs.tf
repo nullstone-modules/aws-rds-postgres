@@ -25,5 +25,5 @@ output "db_user_security_group_id" {
 
 output "internal_db_fqdn" {
   value       = aws_route53_record.this.fqdn
-  description = "string ||| The full domain for an internal, vanity subdomain for the Postgres instnace."
+  description = "string ||| The full domain for an internal, vanity subdomain for the Postgres instance."
 }

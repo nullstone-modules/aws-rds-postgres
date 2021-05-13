@@ -10,8 +10,7 @@ resource "random_password" "this" {
 }
 
 resource "aws_secretsmanager_secret" "password" {
-  name_prefix = "${data.ns_workspace.this.slashed_name}/master"
-
+  name = "${local.resource_name}/master"
   tags = data.ns_workspace.this.tags
 }
 

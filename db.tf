@@ -1,5 +1,5 @@
 resource "aws_db_instance" "this" {
-  identifier = data.ns_workspace.this.hyphenated_name
+  identifier = local.resource_name
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
   engine                 = "postgres"
@@ -21,7 +21,7 @@ resource "aws_db_instance" "this" {
 }
 
 resource "aws_db_subnet_group" "this" {
-  name        = data.ns_workspace.this.hyphenated_name
+  name        = local.resource_name
   description = "Postgres db subnet group for postgres cluster"
   subnet_ids  = local.private_subnet_ids
   tags        = data.ns_workspace.this.tags

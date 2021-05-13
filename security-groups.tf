@@ -1,13 +1,13 @@
 resource "aws_security_group" "this" {
   vpc_id = local.vpc_id
-  name   = data.ns_workspace.this.slashed_name
-  tags   = data.ns_workspace.this.tags
+  name   = local.resource_name
+  tags   = merge(data.ns_workspace.this.tags, { Name = data.ns_workspace.this.slashed_name })
 }
 
 resource "aws_security_group" "user" {
   vpc_id = local.vpc_id
-  name   = "${data.ns_workspace.this.slashed_name}-user"
-  tags   = data.ns_workspace.this.tags
+  name   = "pg-user/${local.resource_name}"
+  tags   = merge(data.ns_workspace.this.tags, { Name = "pg-user/${data.ns_workspace.this.slashed_name}" })
 }
 
 resource "aws_security_group_rule" "this-from-user" {
