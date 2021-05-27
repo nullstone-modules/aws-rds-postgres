@@ -12,7 +12,7 @@ resource "aws_db_instance" "this" {
   port                   = 5432
   vpc_security_group_ids = [aws_security_group.this.id]
 
-  username = data.ns_workspace.this.block_name
+  username = replace(data.ns_workspace.this.block_ref, "-", "_")
   password = random_password.this.result
 
   final_snapshot_identifier = local.resource_name
