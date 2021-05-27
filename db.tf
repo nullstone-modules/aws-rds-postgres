@@ -21,6 +21,10 @@ resource "aws_db_instance" "this" {
   backup_window           = "02:00-03:00"
 
   tags = data.ns_workspace.this.tags
+
+  lifecycle {
+    ignore_changes = [username]
+  }
 }
 
 resource "aws_db_subnet_group" "this" {
