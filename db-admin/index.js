@@ -29,7 +29,7 @@ async function createUser(metadata) {
 
     const client = await createDbClient()
     await client.connect()
-    const res = await client.query(`CREATE USER $1 WITH PASSWORD $2`, [username, password.value])
+    const res = await client.query(`CREATE USER "${username}" WITH PASSWORD '${password}'`)
     await client.end()
 }
 
@@ -48,7 +48,7 @@ async function createDatabase(metadata) {
 
     const client = await createDbClient()
     await client.connect()
-    const res = await client.query(`CREATE DATABASE $1 OWNER $2`, [databaseName, owner])
+    const res = await client.query(`CREATE DATABASE '${databaseName}' OWNER '${owner}'`)
     await client.end()
 }
 
