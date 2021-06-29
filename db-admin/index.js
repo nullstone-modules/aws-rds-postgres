@@ -9,11 +9,6 @@ async function getSecret(secretId) {
     return JSON.parse(result.SecretString)
 }
 
-async function createDbClient() {
-    const config = await getSecret(dbConfigSecretId)
-    return new Client(config)
-}
-
 async function createUser(metadata) {
     if (!metadata) {
         throw new Error('cannot create user: event "metadata" missing')
@@ -27,9 +22,18 @@ async function createUser(metadata) {
         throw new Error('cannot create user: password is required')
     }
 
-    const client = await createDbClient()
+    const dbConfig = await getSecret(dbConfigSecretId)
+    const client = new Client(dbConfig)
     await client.connect()
-    const res = await client.query(`CREATE USER "${username}" WITH PASSWORD '${password}'`)
+
+    // There is no "CREATE USER IF NOT EXISTS", check to see if it exists first
+    const res = await client.query(`SELECT 1 FROM pg_roles WHERE rolname = '${username}'`)
+    if (res && res.rows && res.rows.length > 0) {
+        console.log(`User ${username} already exists`)
+        return
+    }
+
+    await client.query(`CREATE USER "${username}" WITH PASSWORD '${password}'`)
     await client.end()
 }
 
@@ -46,10 +50,30 @@ async function createDatabase(metadata) {
         throw new Error('cannot create database: owner is required')
     }
 
-    const client = await createDbClient()
+    const dbConfig = await getSecret(dbConfigSecretId)
+    const client = new Client(dbConfig)
     await client.connect()
-    const res = await client.query(`CREATE DATABASE '${databaseName}' OWNER '${owner}'`)
-    await client.end()
+
+    // There is no "CREATE DATABASE IF NOT EXISTS", check to see if it exists first
+    const res = await client.query(`SELECT 1 FROM pg_database WHERE datname = '${databaseName}'`)
+    if (res && res.rows && res.rows.length > 0) {
+        console.log(`Database ${databaseName} already exists`)
+        return
+    }
+
+    try {
+        // In order to grant ownership of a database to another user, we must belong that user role
+        // We don't want to be part of that role long-term, so revoke access once created
+        console.log("Granting temporary access to user role")
+        await client.query(`GRANT "${owner}" TO "${dbConfig.user}"`)
+        console.log("Creating database, assigning owner to service user")
+        await client.query(`CREATE DATABASE "${databaseName}" OWNER '${owner}'`)
+    } finally {
+        try {
+            console.log("Revoking temporary access to user role")
+            await client.query(`REVOKE "${owner}" FROM "${dbConfig.user}"`)
+        } catch { }
+    }
 }
 
 exports.handler = async function(event, context, callback) {
