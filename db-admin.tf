@@ -1,10 +1,11 @@
 resource "aws_lambda_function" "db_admin" {
-  function_name = "${local.resource_name}-db-admin"
-  handler       = "exports.handler"
-  runtime       = "nodejs14.x"
-  tags          = data.ns_workspace.this.tags
-  filename      = "db-admin.zip"
-  role          = aws_iam_role.db_admin.arn
+  function_name    = "${local.resource_name}-db-admin"
+  handler          = "index.handler"
+  runtime          = "nodejs14.x"
+  tags             = data.ns_workspace.this.tags
+  filename         = "db-admin.zip"
+  source_code_hash = filebase64sha256("db-admin.zip")
+  role             = aws_iam_role.db_admin.arn
 
   environment {
     variables = {
@@ -13,7 +14,10 @@ resource "aws_lambda_function" "db_admin" {
   }
 
   vpc_config {
-    security_group_ids = [aws_security_group.user.id]
+    security_group_ids = [
+      aws_security_group.this.id,
+      aws_security_group.user.id,
+    ]
     subnet_ids         = local.private_subnet_ids
   }
 }

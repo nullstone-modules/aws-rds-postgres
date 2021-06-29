@@ -1,10 +1,16 @@
 const { Client } = require('pg')
 const Aws = require('aws-sdk')
+const dbConfigSecretId = process.env.DB_CONFIG_SECRET_ID
 
-async function createClient() {
-    const sm = new Aws.SecretsManager()
-    const result = await sm.getSecretValue({ SecretId: process.env.DB_CONFIG_SECRET_ID })
-    const config = JSON.parse(result)
+async function getSecret(secretId) {
+    const sm  = new Aws.SecretsManager()
+    const request = sm.getSecretValue({ SecretId: secretId })
+    const result = await request.promise()
+    return JSON.parse(result.SecretString)
+}
+
+async function createDbClient() {
+    const config = await getSecret(dbConfigSecretId)
     return new Client(config)
 }
 
@@ -21,7 +27,7 @@ async function createUser(metadata) {
         throw new Error('cannot create user: password is required')
     }
 
-    const client = await createClient()
+    const client = await createDbClient()
     await client.connect()
     const res = await client.query(`CREATE USER $1 WITH PASSWORD $2`, [username, password.value])
     await client.end()
@@ -40,20 +46,19 @@ async function createDatabase(metadata) {
         throw new Error('cannot create database: owner is required')
     }
 
-    const client = await createClient()
+    const client = await createDbClient()
     await client.connect()
     const res = await client.query(`CREATE DATABASE $1 OWNER $2`, [databaseName, owner])
     await client.end()
 }
 
-exports.handler = async (event, context, callback) => {
-    const input = event.payload
-    switch (input.type) {
+exports.handler = async function(event, context, callback) {
+    switch (event.type) {
         case 'create-user':
-            await createUser(input?.metadata)
+            await createUser(event?.metadata)
             break
         case 'create-database':
-            await createDatabase(input?.metadata)
+            await createDatabase(event?.metadata)
             break
     }
 }
