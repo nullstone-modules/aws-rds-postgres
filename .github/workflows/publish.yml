@@ -25,7 +25,9 @@ jobs:
         working-directory: db-admin
         run: npm install
       - name: Package lambda code
-        run: zip -r ./db-admin.zip ./db-admin
+        run: |
+          cd db-admin
+          zip -r ../db-admin.zip .
 
       # Package files into tgz
       - name: Package
