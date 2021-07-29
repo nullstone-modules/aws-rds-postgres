@@ -24,6 +24,6 @@ output "db_user_security_group_id" {
 }
 
 output "db_admin_function_name" {
-  value       = aws_lambda_function.db_admin.function_name
+  value       = module.db_admin.function_name
   description = "string ||| AWS Lambda Function name for database admin utility"
 }

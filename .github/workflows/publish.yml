@@ -17,25 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # Package lambda code
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Install node lambda dependencies
-        working-directory: db-admin
-        run: npm install
-      - name: Package lambda code
-        run: |
-          cd db-admin
-          zip -r ../db-admin.zip .
-
-      # Package files into tgz
-      - name: Package
-        run: tar -cvzf module.tgz *.tf db-admin.zip
-
       - name: Find version
         id: version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/v}
+
+      # Package files into tgz
+      - name: Package
+        run: tar -cvzf module.tgz *.tf
 
       # Publish to nullstone
       - name: Publish
