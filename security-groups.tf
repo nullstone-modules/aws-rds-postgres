@@ -10,15 +10,6 @@ resource "aws_security_group" "user" {
   tags   = merge(data.ns_workspace.this.tags, { Name = "pg-user/${local.resource_name}" })
 }
 
-resource "aws_security_group_rule" "this-to-https" {
-  security_group_id = aws_security_group.this.id
-  protocol          = "tcp"
-  type              = "egress"
-  from_port         = 443
-  to_port           = 443
-  cidr_blocks       = ["0.0.0.0/0"]
-}
-
 resource "aws_security_group_rule" "this-from-user" {
   security_group_id        = aws_security_group.this.id
   protocol                 = "tcp"
