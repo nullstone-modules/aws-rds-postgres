@@ -17,13 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # Package files into tgz
-      - name: Package
-        run: tar -cvzf module.tgz *.tf
-
       - name: Find version
         id: version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/v}
+
+      # Package files into tgz
+      - name: Package
+        run: tar -cvzf module.tgz *.tf
 
       # Publish to nullstone
       - name: Publish
