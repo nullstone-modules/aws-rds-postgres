@@ -1,5 +1,6 @@
 module "db_admin" {
-  source = "api.nullstone.io/nullstone/aws-pg-db-admin/aws"
+  source  = "api.nullstone.io/nullstone/aws-pg-db-admin/aws"
+  version = "~> 0.1.0"
 
   name     = local.resource_name
   tags     = data.ns_workspace.this.tags
