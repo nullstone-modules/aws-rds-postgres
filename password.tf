@@ -16,5 +16,5 @@ resource "aws_secretsmanager_secret" "password" {
 
 resource "aws_secretsmanager_secret_version" "password" {
   secret_id     = aws_secretsmanager_secret.password.id
-  secret_string = jsonencode(map("username", aws_db_instance.this.username, "password", random_password.this.result))
+  secret_string = jsonencode(tomap({ "username" = aws_db_instance.this.username, "password" = random_password.this.result }))
 }
