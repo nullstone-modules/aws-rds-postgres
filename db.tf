@@ -15,7 +15,10 @@ resource "aws_db_instance" "this" {
   username = replace(data.ns_workspace.this.block_ref, "-", "_")
   password = random_password.this.result
 
-  final_snapshot_identifier = local.resource_name
+  // final_snapshot_identifier is unique to when an instance is launched
+  // This prevents repeated launch+destroy from creating the same final snapshot and erroring
+  // Changes to the name are ignored so it doesn't keep invalidating the instance
+  final_snapshot_identifier = "${local.resource_name}-${replace(timestamp(), ":", "-")}"
 
   backup_retention_period = var.backup_retention_period
   backup_window           = "02:00-03:00"
@@ -23,7 +26,7 @@ resource "aws_db_instance" "this" {
   tags = data.ns_workspace.this.tags
 
   lifecycle {
-    ignore_changes = [username]
+    ignore_changes = [username, final_snapshot_identifier]
   }
 }
 
