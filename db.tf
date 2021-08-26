@@ -9,7 +9,7 @@ resource "aws_db_instance" "this" {
   allocated_storage      = var.allocated_storage
   storage_encrypted      = true
   storage_type           = "standard"
-  port                   = 5432
+  port                   = local.port
   vpc_security_group_ids = [aws_security_group.this.id]
 
   username = replace(data.ns_workspace.this.block_ref, "-", "_")
