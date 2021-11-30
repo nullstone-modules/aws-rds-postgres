@@ -11,7 +11,7 @@ resource "random_password" "this" {
 
 resource "aws_secretsmanager_secret" "password" {
   name = "${local.resource_name}/master"
-  tags = data.ns_workspace.this.tags
+  tags = local.tags
 }
 
 resource "aws_secretsmanager_secret_version" "password" {

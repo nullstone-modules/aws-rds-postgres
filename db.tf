@@ -11,6 +11,7 @@ resource "aws_db_instance" "this" {
   storage_type           = "gp2"
   port                   = local.port
   vpc_security_group_ids = [aws_security_group.this.id]
+  tags                   = local.tags
 
   username = replace(data.ns_workspace.this.block_ref, "-", "_")
   password = random_password.this.result
@@ -23,8 +24,6 @@ resource "aws_db_instance" "this" {
   backup_retention_period = var.backup_retention_period
   backup_window           = "02:00-03:00"
 
-  tags = data.ns_workspace.this.tags
-
   lifecycle {
     ignore_changes = [username, final_snapshot_identifier]
   }
@@ -34,5 +33,5 @@ resource "aws_db_subnet_group" "this" {
   name        = local.resource_name
   description = "Postgres db subnet group for postgres cluster"
   subnet_ids  = local.private_subnet_ids
-  tags        = data.ns_workspace.this.tags
+  tags        = local.tags
 }

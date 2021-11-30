@@ -1,13 +1,13 @@
 resource "aws_security_group" "this" {
   vpc_id = local.vpc_id
   name   = local.resource_name
-  tags   = merge(data.ns_workspace.this.tags, { Name = local.resource_name })
+  tags   = merge(local.tags, { Name = local.resource_name })
 }
 
 resource "aws_security_group" "user" {
   vpc_id = local.vpc_id
   name   = "pg-user/${local.resource_name}"
-  tags   = merge(data.ns_workspace.this.tags, { Name = "pg-user/${local.resource_name}" })
+  tags   = merge(local.tags, { Name = "pg-user/${local.resource_name}" })
 }
 
 resource "aws_security_group_rule" "this-from-user" {
