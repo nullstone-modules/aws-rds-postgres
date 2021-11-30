@@ -1,11 +1,11 @@
 resource "aws_db_instance" "this" {
   identifier = local.resource_name
 
-  db_subnet_group_name   = var.high_availability ? aws_db_subnet_group.this[0].name : ""
+  db_subnet_group_name   = aws_db_subnet_group.this.name
   engine                 = "postgres"
   engine_version         = var.postgres_version
   instance_class         = var.instance_class
-  multi_az               = true
+  multi_az               = var.high_availability
   allocated_storage      = var.allocated_storage
   storage_encrypted      = true
   storage_type           = "gp2"
@@ -35,5 +35,4 @@ resource "aws_db_subnet_group" "this" {
   description = "Postgres db subnet group for postgres cluster"
   subnet_ids  = local.private_subnet_ids
   tags        = data.ns_workspace.this.tags
-  count       = var.high_availability ? 1 : 0
 }
