@@ -34,7 +34,7 @@ resource "aws_db_instance" "this" {
 resource "aws_db_subnet_group" "this" {
   name        = local.resource_name
   description = "Postgres db subnet group for postgres cluster"
-  subnet_ids  = local.private_subnet_ids
+  subnet_ids  = var.enable_public_access ? local.public_subnet_ids : local.private_subnet_ids
   tags        = local.tags
 }
 
