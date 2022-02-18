@@ -31,6 +31,26 @@ In dev environments, it is best to turn off to save on costs.
 EOF
 }
 
+variable "enforce_ssl" {
+  type        = bool
+  default     = false
+  description = <<EOF
+By default, the postgres cluster will have SSL enabled.
+This toggle will require an SSL connection.
+This is highly recommended if you have public access enabled.
+EOF
+}
+
+variable "enable_public_access" {
+  type        = bool
+  default     = false
+  description = <<EOF
+By default, the postgres cluster is not accessible to the public.
+If you want to access your database, we recommend using a bastion instead.
+However, this is necessary for scenarios like connecting from a Heroku app.
+EOF
+}
+
 locals {
   port = 5432
 }
