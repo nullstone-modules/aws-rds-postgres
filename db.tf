@@ -13,6 +13,7 @@ resource "aws_db_instance" "this" {
   port                   = local.port
   vpc_security_group_ids = [aws_security_group.this.id]
   tags                   = local.tags
+  publicly_accessible    = var.enable_public_access
 
   username = replace(data.ns_workspace.this.block_ref, "-", "_")
   password = random_password.this.result

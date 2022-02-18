@@ -27,3 +27,14 @@ resource "aws_security_group_rule" "user-to-this" {
   to_port                  = local.port
   source_security_group_id = aws_security_group.this.id
 }
+
+resource "aws_security_group_rule" "this-from-world" {
+  security_group_id = aws_security_group.this.id
+  protocol          = "tcp"
+  type              = "ingress"
+  from_port         = local.port
+  to_port           = local.port
+  cidr_blocks       = ["0.0.0.0/0"]
+
+  count = var.enable_public_access ? 1 : 0
+}
