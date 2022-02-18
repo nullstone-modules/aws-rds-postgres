@@ -2,6 +2,7 @@ resource "aws_db_instance" "this" {
   identifier = local.resource_name
 
   db_subnet_group_name   = aws_db_subnet_group.this.name
+  parameter_group_name   = aws_db_parameter_group.this.name
   engine                 = "postgres"
   engine_version         = var.postgres_version
   instance_class         = var.instance_class
@@ -34,4 +35,24 @@ resource "aws_db_subnet_group" "this" {
   description = "Postgres db subnet group for postgres cluster"
   subnet_ids  = local.private_subnet_ids
   tags        = local.tags
+}
+
+locals {
+  enforce_ssl_parameter = var.enforce_ssl ? tomap({ "rds.force_ssl" = 1 }) : tomap({})
+  db_parameters         = merge(local.enforce_ssl_parameter)
+}
+
+resource "aws_db_parameter_group" "this" {
+  name   = local.resource_name
+  family = "postgres${var.postgres_version}"
+  tags   = local.tags
+
+  dynamic "parameter" {
+    for_each = local.db_parameters
+
+    content {
+      name  = parameter.key
+      value = parameter.value
+    }
+  }
 }
