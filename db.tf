@@ -44,9 +44,10 @@ locals {
 }
 
 resource "aws_db_parameter_group" "this" {
-  name   = local.resource_name
-  family = "postgres${var.postgres_version}"
-  tags   = local.tags
+  name        = local.resource_name
+  family      = "postgres-${local.resource_name}"
+  tags        = local.tags
+  description = "Postgres for ${local.block_name} (${local.env_name})"
 
   dynamic "parameter" {
     for_each = local.db_parameters
