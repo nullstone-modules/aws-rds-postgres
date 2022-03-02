@@ -1,19 +1,20 @@
 resource "aws_db_instance" "this" {
   identifier = local.resource_name
 
-  db_subnet_group_name   = aws_db_subnet_group.this.name
-  parameter_group_name   = aws_db_parameter_group.this.name
-  engine                 = "postgres"
-  engine_version         = var.postgres_version
-  instance_class         = var.instance_class
-  multi_az               = var.high_availability
-  allocated_storage      = var.allocated_storage
-  storage_encrypted      = true
-  storage_type           = "gp2"
-  port                   = local.port
-  vpc_security_group_ids = [aws_security_group.this.id]
-  tags                   = local.tags
-  publicly_accessible    = var.enable_public_access
+  db_subnet_group_name        = aws_db_subnet_group.this.name
+  parameter_group_name        = aws_db_parameter_group.this.name
+  engine                      = "postgres"
+  engine_version              = var.postgres_version
+  allow_major_version_upgrade = true
+  instance_class              = var.instance_class
+  multi_az                    = var.high_availability
+  allocated_storage           = var.allocated_storage
+  storage_encrypted           = true
+  storage_type                = "gp2"
+  port                        = local.port
+  vpc_security_group_ids      = [aws_security_group.this.id]
+  tags                        = local.tags
+  publicly_accessible         = var.enable_public_access
 
   username = replace(data.ns_workspace.this.block_ref, "-", "_")
   password = random_password.this.result
@@ -43,8 +44,13 @@ locals {
   db_parameters         = merge(local.enforce_ssl_parameter)
 }
 
+locals {
+  // Can only contain alphanumeric and hypen characters
+  param_group_name = "${local.resource_name}-postgres${replace(var.postgres_version, ".", "-")}"
+}
+
 resource "aws_db_parameter_group" "this" {
-  name        = "${local.resource_name}-postgres${var.postgres_version}"
+  name        = local.param_group_name
   family      = "postgres${var.postgres_version}"
   tags        = local.tags
   description = "Postgres for ${local.block_name} (${local.env_name})"
