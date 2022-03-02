@@ -1,0 +1,11 @@
+org_name: nullstone
+name: aws-rds-postgres
+friendly_name: RDS Postgres Cluster
+description: Produces a standard, best-practice RDS Postgres cluster in AWS
+category: datastore
+type: postgres/aws
+appCategories: []
+layer: database
+is_public: true
+provider_types:
+    - aws
