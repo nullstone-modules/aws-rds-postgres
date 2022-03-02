@@ -44,9 +44,16 @@ locals {
 }
 
 resource "aws_db_parameter_group" "this" {
-  name   = local.resource_name
-  family = "postgres${var.postgres_version}"
-  tags   = local.tags
+  name        = "${local.resource_name}-postgres${var.postgres_version}"
+  family      = "postgres${var.postgres_version}"
+  tags        = local.tags
+  description = "Postgres for ${local.block_name} (${local.env_name})"
+
+  // When postgres version changes, we need to create a new one that attaches to the db
+  //   because we can't destroy a parameter group that's in use
+  lifecycle {
+    create_before_destroy = true
+  }
 
   dynamic "parameter" {
     for_each = local.db_parameters
