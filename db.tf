@@ -41,7 +41,7 @@ resource "aws_db_subnet_group" "this" {
 
 locals {
   enforce_ssl_parameter = var.enforce_ssl ? tomap({ "rds.force_ssl" = 1 }) : tomap({})
-  db_parameters         = merge(local.enforce_ssl_parameter)
+  db_parameters         = merge(var.custom_postgres_params, local.enforce_ssl_parameter)
 }
 
 locals {

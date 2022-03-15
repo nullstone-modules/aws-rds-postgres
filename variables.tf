@@ -51,6 +51,15 @@ However, this is necessary for scenarios like connecting from a Heroku app.
 EOF
 }
 
+variable "custom_postgres_params" {
+  type        = map(string)
+  default     = tomap({})
+  description = <<EOF
+This is a dictionary of parameters to custom-configure the RDS postgres instance.
+For a list of parameters, see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Parameters.html
+EOF
+}
+
 locals {
   port = 5432
 }
