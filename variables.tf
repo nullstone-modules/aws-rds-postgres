@@ -53,7 +53,7 @@ EOF
 
 variable "custom_postgres_params" {
   type        = map(string)
-  default     = tomap({})
+  default     = {}
   description = <<EOF
 This is a dictionary of parameters to custom-configure the RDS postgres instance.
 For a list of parameters, see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Parameters.html
