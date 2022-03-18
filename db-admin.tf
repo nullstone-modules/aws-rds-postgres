@@ -3,7 +3,7 @@ module "db_admin" {
   version = "~> 0.2.0"
 
   name     = local.resource_name
-  tags     = data.ns_workspace.this.tags
+  tags     = local.tags
   host     = aws_db_instance.this.address
   username = aws_db_instance.this.username
   password = random_password.this.result
