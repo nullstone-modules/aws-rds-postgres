@@ -1,7 +1,8 @@
 resource "aws_security_group" "this" {
-  vpc_id = local.vpc_id
-  name   = local.resource_name
-  tags   = merge(local.tags, { Name = local.resource_name })
+  vpc_id      = local.vpc_id
+  name        = local.resource_name
+  tags        = merge(local.tags, { Name = local.resource_name })
+  description = "Security group attached to RDS Instance ${local.resource_name}"
 }
 
 resource "aws_security_group_rule" "this-from-world" {

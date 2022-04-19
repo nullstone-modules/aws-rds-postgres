@@ -6,6 +6,7 @@ resource "aws_db_instance" "this" {
   engine                      = "postgres"
   engine_version              = var.postgres_version
   allow_major_version_upgrade = true
+  auto_minor_version_upgrade  = true
   instance_class              = var.instance_class
   multi_az                    = var.high_availability
   allocated_storage           = var.allocated_storage
@@ -28,6 +29,7 @@ resource "aws_db_instance" "this" {
   backup_window           = "02:00-03:00"
 
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+  monitoring_interval             = 5
 
   lifecycle {
     ignore_changes = [username, final_snapshot_identifier]
