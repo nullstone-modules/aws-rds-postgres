@@ -1,6 +1,8 @@
 # aws-rds-postgres
 
-Nullstone Block standing up AWS RDS Postgres
+This is a Nullstone module to create an AWS RDS Postgres instance.
+This instance is configured to enable enhanced monitoring and emit logs to cloudwatch.
+Additionally, this module creates resources that are necessary to securely connect apps via Nullstone UI.
 
 ## Security & Compliance
 
