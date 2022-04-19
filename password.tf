@@ -10,8 +10,9 @@ resource "random_password" "this" {
 }
 
 resource "aws_secretsmanager_secret" "password" {
-  name = "${local.resource_name}/master"
-  tags = local.tags
+  name       = "${local.resource_name}/master"
+  tags       = local.tags
+  kms_key_id = aws_kms_key.this.id
 }
 
 resource "aws_secretsmanager_secret_version" "password" {
