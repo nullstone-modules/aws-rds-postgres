@@ -27,9 +27,13 @@ resource "aws_db_instance" "this" {
   backup_retention_period = var.backup_retention_period
   backup_window           = "02:00-03:00"
 
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+
   lifecycle {
     ignore_changes = [username, final_snapshot_identifier]
   }
+
+  depends_on = [aws_cloudwatch_log_group.this]
 }
 
 resource "aws_db_subnet_group" "this" {
