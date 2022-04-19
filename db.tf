@@ -17,8 +17,9 @@ resource "aws_db_instance" "this" {
   tags                        = local.tags
   publicly_accessible         = var.enable_public_access
 
-  username = replace(data.ns_workspace.this.block_ref, "-", "_")
-  password = random_password.this.result
+  iam_database_authentication_enabled = true
+  username                            = replace(data.ns_workspace.this.block_ref, "-", "_")
+  password                            = random_password.this.result
 
   // final_snapshot_identifier is unique to when an instance is launched
   // This prevents repeated launch+destroy from creating the same final snapshot and erroring
