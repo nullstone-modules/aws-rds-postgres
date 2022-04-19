@@ -7,3 +7,4 @@
 * Change default postgresql version to 13.
 * Secrets and logs are encrypted using a CMK (customer-managed key) instead of the default key.
 * Enabled IAM authentication on database instance.
+* Enabled query logging.
