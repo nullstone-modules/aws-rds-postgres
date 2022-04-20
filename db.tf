@@ -38,7 +38,7 @@ resource "aws_db_instance" "this" {
     ignore_changes = [username, final_snapshot_identifier]
   }
 
-  depends_on = [aws_cloudwatch_log_group.this]
+  depends_on = [aws_cloudwatch_log_group.this, aws_cloudwatch_log_group.upgrade]
 }
 
 resource "aws_db_subnet_group" "this" {

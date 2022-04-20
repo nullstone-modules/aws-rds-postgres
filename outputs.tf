@@ -30,5 +30,10 @@ output "db_admin_function_name" {
 
 output "db_log_group" {
   value       = aws_cloudwatch_log_group.this.name
-  description = "string ||| The name of the Cloudwatch Log Group where logs are emitted for the DB Instance"
+  description = "string ||| The name of the Cloudwatch Log Group where postgresql logs are emitted for the DB Instance"
+}
+
+output "db_upgrade_log_group" {
+  value       = aws_cloudwatch_log_group.upgrade.name
+  description = "string ||| The name of the Cloudwatch Log Group where upgrade logs are emitted for the DB Instance"
 }
