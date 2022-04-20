@@ -1,8 +1,7 @@
 resource "aws_db_instance" "this" {
-  identifier = local.resource_name
-
+  identifier                  = local.resource_name
   db_subnet_group_name        = aws_db_subnet_group.this.name
-  parameter_group_name        = aws_db_parameter_group.db.name
+  parameter_group_name        = aws_db_parameter_group.this.name
   engine                      = "postgres"
   engine_version              = var.postgres_version
   allow_major_version_upgrade = true
@@ -20,6 +19,8 @@ resource "aws_db_instance" "this" {
   iam_database_authentication_enabled = true
   username                            = replace(data.ns_workspace.this.block_ref, "-", "_")
   password                            = random_password.this.result
+
+  apply_immediately = true
 
   // final_snapshot_identifier is unique to when an instance is launched
   // This prevents repeated launch+destroy from creating the same final snapshot and erroring
