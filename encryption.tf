@@ -20,6 +20,7 @@ data "aws_iam_policy_document" "encryption_key" {
   }
 
   statement {
+    sid       = "Enable Cloudwatch Log encryption"
     effect    = "Allow"
     resources = ["*"]
     actions = [
