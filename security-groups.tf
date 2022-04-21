@@ -1,15 +1,17 @@
 resource "aws_security_group" "this" {
-  vpc_id = local.vpc_id
-  name   = local.resource_name
-  tags   = merge(local.tags, { Name = local.resource_name })
-  #  description = "Security group attached to RDS Instance ${local.resource_name}"
+  vpc_id      = local.vpc_id
+  name        = local.resource_name
+  tags        = merge(local.tags, { Name = local.resource_name })
+  description = "Managed by Terraform"
 }
 
 // Deprecated: User security group will be removed in a future release
 resource "aws_security_group" "user" {
-  vpc_id = local.vpc_id
-  name   = "pg-user/${local.resource_name}"
-  tags   = merge(local.tags, { Name = "pg-user/${local.resource_name}" })
+  #bridgecrew:skip=BC_AWS_NETWORKING_51: Skipping since this security group is deprecated
+  vpc_id      = local.vpc_id
+  name        = "pg-user/${local.resource_name}"
+  tags        = merge(local.tags, { Name = "pg-user/${local.resource_name}" })
+  description = "Managed by Terraform"
 }
 
 resource "aws_security_group_rule" "this-from-world" {

@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "encryption_key" {
   statement {
     sid       = "Enable IAM User permissions"
     effect    = "Allow"
-    resources = ["*"]
+    resources = [aws_kms_key.this.arn]
     actions   = ["kms:*"]
 
     principals {
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "encryption_key" {
   statement {
     sid       = "Enable Cloudwatch Log encryption"
     effect    = "Allow"
-    resources = ["*"]
+    resources = [aws_kms_key.this.arn]
     actions = [
       "kms:Encrypt*",
       "kms:Decrypt*",
