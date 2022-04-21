@@ -11,7 +11,7 @@ module "db_admin" {
   network = {
     vpc_id               = local.vpc_id
     pg_security_group_id = aws_security_group.this.id
-    security_group_ids   = [aws_security_group.user.id]
+    security_group_ids   = []
     subnet_ids           = local.private_subnet_ids
   }
 }

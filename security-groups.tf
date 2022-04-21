@@ -5,15 +5,6 @@ resource "aws_security_group" "this" {
   description = "Managed by Terraform"
 }
 
-// Deprecated: User security group will be removed in a future release
-resource "aws_security_group" "user" {
-  #bridgecrew:skip=BC_AWS_NETWORKING_51: Skipping since this security group is deprecated
-  vpc_id      = local.vpc_id
-  name        = "pg-user/${local.resource_name}"
-  tags        = merge(local.tags, { Name = "pg-user/${local.resource_name}" })
-  description = "Managed by Terraform"
-}
-
 resource "aws_security_group_rule" "this-from-world" {
   security_group_id = aws_security_group.this.id
   protocol          = "tcp"
