@@ -1,5 +1,7 @@
-## 0.9.0 (Apr 19, 2022)
+## 0.9.1 (Jun 07, 2022)
+* Fixed `random_string` `number` deprecation: changed to `numeric`. 
 
+## 0.9.0 (Apr 19, 2022)
 * All changes made to the database as a result of this module are now applied immediately.
 * Minor version upgrades are now automatically performed.
 * Postgresql logs are now emitted to a Cloudwatch log group.
