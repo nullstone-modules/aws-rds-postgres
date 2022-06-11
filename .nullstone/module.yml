@@ -3,9 +3,11 @@ name: aws-rds-postgres
 friendly_name: RDS Postgres Cluster
 description: Produces a standard, best-practice RDS Postgres cluster in AWS
 category: datastore
-type: postgres/aws
-appCategories: []
-layer: database
-is_public: true
+subcategory: ""
 provider_types:
     - aws
+platform: postgres
+subplatform: rds
+type: postgres/aws
+appCategories: []
+is_public: true
