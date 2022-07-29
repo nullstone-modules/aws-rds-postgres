@@ -1,10 +1,7 @@
 locals {
   enforce_ssl_parameter = var.enforce_ssl ? tomap({ "rds.force_ssl" = 1 }) : tomap({})
-  default_db_parameters = tomap({
-    "log_statement"              = "all"
-    "log_min_duration_statement" = "1"
-  })
-  db_parameters = merge(var.custom_postgres_params, local.default_db_parameters, local.enforce_ssl_parameter)
+  default_db_parameters = tomap({})
+  db_parameters         = merge(local.default_db_parameters, var.custom_postgres_params, local.enforce_ssl_parameter)
 }
 
 locals {
