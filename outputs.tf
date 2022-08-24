@@ -28,6 +28,11 @@ output "db_admin_function_name" {
   description = "string ||| AWS Lambda Function name for database admin utility"
 }
 
+output "db_admin_invoker" {
+  value       = module.db_admin.invoker
+  description = "string ||| IAM User with explicit permissions to invoke db admin lambda function."
+}
+
 output "db_log_group" {
   value       = aws_cloudwatch_log_group.this.name
   description = "string ||| The name of the Cloudwatch Log Group where postgresql logs are emitted for the DB Instance"
