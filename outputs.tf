@@ -30,7 +30,7 @@ output "db_admin_function_name" {
 
 output "db_admin_invoker" {
   value       = module.db_admin.invoker
-  description = "string ||| IAM User with explicit permissions to invoke db admin lambda function."
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| IAM User with explicit permissions to invoke db admin lambda function."
   sensitive   = true
 }
 
