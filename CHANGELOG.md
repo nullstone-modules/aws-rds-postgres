@@ -1,3 +1,6 @@
+# 0.11.5 (Feb 09, 2023)
+* Added `db_admin_function_url` output.
+
 ## 0.9.1 (Jun 07, 2022)
 * Fixed `random_string` `number` deprecation: changed to `numeric`. 
 
