@@ -1,5 +1,5 @@
-#bridgecrew:skip=CKV_AWS_157: "Ensure that RDS instances have Multi-AZ enabled"
 resource "aws_db_instance" "this" {
+  #bridgecrew:skip=CKV_AWS_157: "Ensure that RDS instances have Multi-AZ enabled"
   identifier                  = local.resource_name
   db_subnet_group_name        = aws_db_subnet_group.this.name
   parameter_group_name        = aws_db_parameter_group.this.name
