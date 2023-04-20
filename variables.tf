@@ -23,10 +23,10 @@ variable "backup_retention_period" {
 
 variable "high_availability" {
   type        = bool
-  default     = true
+  default     = false
   description = <<EOF
 Enables high availability and failover support on the database instance.
-By default, this is enabled to ensure reliability.
+By default, this is disabled. It is recommended to enable this in production environments.
 In dev environments, it is best to turn off to save on costs.
 EOF
 }
