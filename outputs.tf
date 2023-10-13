@@ -33,6 +33,11 @@ output "db_admin_function_url" {
   description = "string ||| AWS Lambda Function url for database admin utility"
 }
 
+output "db_admin_version" {
+  value       = "0.7"
+  description = "string ||| The version number of the pg-db-admin utility"
+}
+
 output "db_admin_invoker" {
   value       = module.db_admin.invoker
   description = "object({ name: string, access_key: string, secret_key: string }) ||| IAM User with explicit permissions to invoke db admin lambda function."
