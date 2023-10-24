@@ -1,3 +1,6 @@
+# 0.13.1 (Oct 24, 2023)
+* Added description (with link to available choices) to `instance_class`.
+
 # 0.13.0 (Oct 13, 2023)
 * Upgraded `pg-db-admin` to support lambda invocations.
 
