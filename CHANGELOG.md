@@ -1,3 +1,6 @@
+# 0.13.2 (Feb 06, 2024)
+* Added metrics support.
+
 # 0.13.1 (Oct 24, 2023)
 * Added description (with link to available choices) to `instance_class`.
 
