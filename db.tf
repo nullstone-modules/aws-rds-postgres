@@ -1,3 +1,7 @@
+locals {
+  ca_cert_identifier = "rds-ca-rsa2048-g1"
+}
+
 resource "aws_db_instance" "this" {
   #bridgecrew:skip=CKV_AWS_157: "Ensure that RDS instances have Multi-AZ enabled"
   identifier                  = local.resource_name
@@ -20,6 +24,7 @@ resource "aws_db_instance" "this" {
   iam_database_authentication_enabled = true
   username                            = replace(data.ns_workspace.this.block_ref, "-", "_")
   password                            = random_password.this.result
+  ca_cert_identifier                  = local.ca_cert_identifier
 
   apply_immediately = true
 

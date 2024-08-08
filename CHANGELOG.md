@@ -1,3 +1,15 @@
+# 0.13.6 (Aug 07, 2024)
+* Upgraded CA Certificate for RDS instance.
+
+# 0.13.5 (Mar 10, 2024)
+* Pinned aws provider upgrade in lockfile. 
+
+# 0.13.4 (Mar 10, 2024)
+* Upgraded aws provider to 5.26.0.
+
+# 0.13.3 (Mar 10, 2024)
+* Upgrade providers to latest.
+
 # 0.13.2 (Feb 06, 2024)
 * Added metrics support.
 
