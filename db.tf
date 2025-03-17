@@ -14,6 +14,7 @@ resource "aws_db_instance" "this" {
   instance_class              = var.instance_class
   multi_az                    = var.high_availability
   allocated_storage           = var.allocated_storage
+  max_allocated_storage       = var.max_allocated_storage
   storage_encrypted           = true
   storage_type                = "gp2"
   port                        = local.port

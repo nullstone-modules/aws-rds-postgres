@@ -1,3 +1,6 @@
+# 0.13.7 (Mar 17, 2025)
+* Added support for storage auto-scaling.
+
 # 0.13.6 (Aug 07, 2024)
 * Upgraded CA Certificate for RDS instance.
 

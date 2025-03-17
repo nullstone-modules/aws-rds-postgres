@@ -18,7 +18,21 @@ EOF
 variable "allocated_storage" {
   type        = number
   default     = 10
-  description = "Allocated storage in GB"
+  description = <<EOF
+The storage in GiB to reserve for the RDS instance.
+If max_allocated_storage is enabled, this argument represents the initial storage allocation.
+While auto-scaling is enabled, changes to allocated_storage are ignored.
+EOF
+}
+
+variable "max_allocated_storage" {
+  type        = number
+  default     = 0
+  description = <<EOF
+This sets the maximum amount of storage in GiB that autoscaling will increase the RDS instance storage.
+Auto-scaling is *only* enabled if max_allocated_storage > allocated_storage.
+When enabled, allocated_storage is only used for setting the initial storage size.
+EOF
 }
 
 variable "backup_retention_period" {
