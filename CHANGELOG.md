@@ -1,3 +1,6 @@
+# 0.13.8 (Apr 17, 2025)
+* Eliminated problematic special characters from password generation.
+
 # 0.13.7 (Mar 17, 2025)
 * Added support for storage auto-scaling.
 
