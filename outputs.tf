@@ -18,6 +18,16 @@ output "db_master_secret_name" {
   description = "string ||| The name of the secret in AWS Secrets Manager containing the password"
 }
 
+output "db_hostname" {
+  value       = aws_db_instance.this.address
+  description = "string ||| The hostname of the postgres instance."
+}
+
+output "db_port" {
+  value       = aws_db_instance.this.port
+  description = "number ||| The port of the postgres instance."
+}
+
 output "db_endpoint" {
   value       = aws_db_instance.this.endpoint
   description = "string ||| The endpoint URL to access the Postgres instance."
