@@ -1,3 +1,7 @@
+# 0.14.0 (Jun 05, 2025)
+* Added `var.maintenance_window` to control system updates are applied.
+* Added `var.auto_upgrade_minor` to allow disabling of minor version upgrades.
+
 # 0.13.9 (May 29, 2025)
 * Added `db_hostname` and `db_port` outputs.
 

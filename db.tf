@@ -10,7 +10,8 @@ resource "aws_db_instance" "this" {
   engine                      = "postgres"
   engine_version              = var.postgres_version
   allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = true
+  auto_minor_version_upgrade  = var.auto_upgrade_minor
+  maintenance_window          = var.maintenance_window
   instance_class              = var.instance_class
   multi_az                    = var.high_availability
   allocated_storage           = var.allocated_storage

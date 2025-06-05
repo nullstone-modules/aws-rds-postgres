@@ -40,9 +40,9 @@ locals {
 
       mappings = {
         memory_average = {
-          account_id  = local.account_id
-          expression  = "memory_average_bytes / 1048576" // Convert bytes to MB
-          dimensions  = local.dims
+          account_id = local.account_id
+          expression = "memory_average_bytes / 1048576" // Convert bytes to MB
+          dimensions = local.dims
         }
         memory_average_bytes = {
           account_id        = local.account_id
