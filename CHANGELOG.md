@@ -1,3 +1,6 @@
+# 0.14.1 (Jun 23, 2025)
+* Fixed metrics ordering to fix metrics retrieval error.
+
 # 0.14.0 (Jun 05, 2025)
 * Added `var.maintenance_window` to control system updates are applied.
 * Added `var.auto_upgrade_minor` to allow disabling of minor version upgrades.
