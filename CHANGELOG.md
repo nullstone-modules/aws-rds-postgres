@@ -1,3 +1,6 @@
+# 0.14.2 (Jul 10, 2025)
+* Updated default engine version to 17.
+
 # 0.14.1 (Jun 23, 2025)
 * Fixed metrics ordering to fix metrics retrieval error.
 
