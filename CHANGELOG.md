@@ -1,5 +1,7 @@
-# 0.14.3 (Jul 02, 2026)
+# 0.15.0 (Jul 02, 2026)
 * Added `var.log_retention` (default 90 days) to control CloudWatch retention for the postgresql and upgrade log groups.
+* Upgraded terraform providers.
+* Expanded tags to include governance elements: owner, data classification, etc.
 
 # 0.14.2 (Jul 10, 2025)
 * Updated default engine version to 17.
