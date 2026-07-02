@@ -41,6 +41,14 @@ variable "backup_retention_period" {
   description = "The number of days that each backup is retained"
 }
 
+variable "log_retention" {
+  type        = number
+  default     = 90
+  description = <<EOF
+The number of days to retain database logs in CloudWatch (postgresql and upgrade log groups).
+EOF
+}
+
 variable "high_availability" {
   type        = bool
   default     = false

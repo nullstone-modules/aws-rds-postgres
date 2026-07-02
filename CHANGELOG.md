@@ -1,3 +1,6 @@
+# 0.14.3 (Jul 02, 2026)
+* Added `var.log_retention` (default 90 days) to control CloudWatch retention for the postgresql and upgrade log groups.
+
 # 0.14.2 (Jul 10, 2025)
 * Updated default engine version to 17.
 
