@@ -1,3 +1,6 @@
+# 0.15.1 (Jul 15, 2026)
+* Added optional `connection.notification` that, when enabled, alerts when there is a high rate of errors on the db admin lambda.
+
 # 0.15.0 (Jul 02, 2026)
 * Added `var.log_retention` (default 90 days) to control CloudWatch retention for the postgresql and upgrade log groups.
 * Upgraded terraform providers.

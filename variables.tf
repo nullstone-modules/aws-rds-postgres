@@ -109,6 +109,17 @@ See [RDS Maintenance Window docs](https://docs.aws.amazon.com/AmazonRDS/latest/U
 EOF
 }
 
+variable "alerts" {
+  type = object({
+    error_rate = optional(number, 5)
+  })
+  default     = {}
+  description = <<EOF
+Thresholds for CloudWatch alarms on the db-admin lambda functions. Only active when a notification connection is provided.
+- error_rate: Percentage of invocations that error over a 5-minute period to trigger the alarm (default: 5%)
+EOF
+}
+
 locals {
   port = 5432
 }
