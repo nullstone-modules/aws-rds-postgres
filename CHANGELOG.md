@@ -1,3 +1,6 @@
+# 0.15.2 (Jul 15, 2026)
+* Fixed terraform lock file.
+
 # 0.15.1 (Jul 15, 2026)
 * Added optional `connection.notification` that, when enabled, alerts when there is a high rate of errors on the db admin lambda.
 
