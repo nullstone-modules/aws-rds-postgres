@@ -53,6 +53,13 @@ output "db_admin_version" {
   description = "string ||| The version number of the pg-db-admin utility"
 }
 
+// Capability flag, not a version: access modules gate their ensure_role_password invocation on this
+// so plans never send the event to an older lambda that would reject it.
+output "db_admin_ensure_password" {
+  value       = true
+  description = "bool ||| Whether the db admin utility supports the ensure_role_password event (pg-db-admin >= 0.10)"
+}
+
 output "db_admin_invoker" {
   value       = module.db_admin.invoker
   description = "object({ name: string, access_key: string, secret_key: string }) ||| IAM User with explicit permissions to invoke db admin lambda function."

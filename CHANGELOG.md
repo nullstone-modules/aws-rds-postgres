@@ -1,3 +1,7 @@
+# 0.16.0 (Sep 01, 2026)
+* Upgraded pg-db-admin to 0.10, adding the `ensure_role_password` event that repairs a role's password only when a login attempt with it fails.
+* Added `db_admin_ensure_password` output so access modules only send the event to a lambda that supports it.
+
 # 0.15.2 (Jul 15, 2026)
 * Fixed terraform lock file.
 
