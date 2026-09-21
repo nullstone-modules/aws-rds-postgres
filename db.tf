@@ -37,6 +37,7 @@ resource "aws_db_instance" "this" {
 
   backup_retention_period = var.backup_retention_period
   backup_window           = "02:00-03:00"
+  copy_tags_to_snapshot   = true
 
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
   monitoring_interval             = 5

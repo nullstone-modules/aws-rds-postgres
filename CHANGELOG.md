@@ -1,3 +1,6 @@
+# 0.16.1 (Sep 21, 2026)
+* Enabled `copy_tags_to_snapshot` so automated and final snapshots carry the workspace tags.
+
 # 0.16.0 (Sep 01, 2026)
 * Upgraded pg-db-admin to 0.10, adding the `ensure_role_password` event that repairs a role's password only when a login attempt with it fails.
 * Added `db_admin_ensure_password` output so access modules only send the event to a lambda that supports it.
